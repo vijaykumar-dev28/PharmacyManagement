@@ -1,0 +1,7 @@
+package com.pharmacy.enums;
+
+public enum Category {
+	ANTIBIOTIC, PAINKILLER, VITAMIN, 
+	ANTACID, ANTIFUNGAL, ANTIVIRAL,
+	DIABETES, BLOOD_PRESSURE, OTHER
+}
