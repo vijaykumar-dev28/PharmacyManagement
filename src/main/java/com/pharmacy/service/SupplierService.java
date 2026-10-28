@@ -3,7 +3,6 @@ package com.pharmacy.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.dto.request.SupplierRequestDTO;
@@ -15,9 +14,12 @@ import com.pharmacy.repository.SupplierRepository;
 
 @Service
 public class SupplierService {
-	@Autowired
-	private SupplierRepository supplierRepo;
+	private final SupplierRepository supplierRepo;
 	
+	public SupplierService(SupplierRepository supplierRepo) {
+		this.supplierRepo = supplierRepo;
+	}
+
 	// helper methods
 	private Supplier toEntity(SupplierRequestDTO d){
 		Supplier s=new Supplier();

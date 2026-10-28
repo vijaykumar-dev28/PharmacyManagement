@@ -18,8 +18,8 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(404).body(e.getMessage());
 	}
 	
-	@ExceptionHandler(UsernameNotFoundException.class)
-	public ResponseEntity<String> handleUserNotFound(UsernameNotFoundException e){
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<String> handleUserNotFound(UserNotFoundException e){
 		return ResponseEntity.status(404).body(e.getMessage());
 	}
 	
@@ -35,6 +35,11 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(DuplicateSupplierException.class)
 	public ResponseEntity<String> handleDuplicateSupplier(DuplicateSupplierException e){
+		return ResponseEntity.status(409).body(e.getMessage());
+	}
+	
+	@ExceptionHandler(DuplicateUserException.class)
+	public ResponseEntity<String> handleDuplicateUser(DuplicateUserException e){
 		return ResponseEntity.status(409).body(e.getMessage());
 	}
 	

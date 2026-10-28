@@ -2,7 +2,6 @@ package com.pharmacy.scheduler;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +12,17 @@ import com.pharmacy.service.MedicineService;
 
 @Component
 public class ExpiryScheduler {
-	@Autowired
-	private MedicineService service;
+	private final MedicineService service;
 	
-	@Autowired
-	private MedicineRepository repo;
+	private final MedicineRepository repo;
 	
+	public ExpiryScheduler(MedicineService service, MedicineRepository repo) {
+		this.service = service;
+		this.repo = repo;
+	}
+
+
+
 	@Scheduled(cron = "0 0 8 * * *")
 	public void checkExpiryAndUpdateStatus(){
 		List<Medicine> medicine=repo.findAll();

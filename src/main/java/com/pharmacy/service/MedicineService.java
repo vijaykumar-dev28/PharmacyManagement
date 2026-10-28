@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.dto.request.MedicineRequestDTO;
@@ -20,12 +19,14 @@ import com.pharmacy.repository.SupplierRepository;
 
 @Service
 public class MedicineService {
-	@Autowired
-	private MedicineRepository medicineRepo;
+	private final MedicineRepository medicineRepo;
+	private final SupplierRepository supplierRepo;
 	
-	@Autowired
-	private SupplierRepository supplierRepo;
-	
+	public MedicineService(MedicineRepository medicineRepo, SupplierRepository supplierRepo) {
+		this.medicineRepo = medicineRepo;
+		this.supplierRepo = supplierRepo;
+	}
+
 	// helper methods
 	
 	private Medicine toEntity(MedicineRequestDTO dto) {

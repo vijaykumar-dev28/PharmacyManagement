@@ -1,6 +1,5 @@
 package com.pharmacy.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +16,11 @@ import jakarta.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 	
-	@Autowired
-	private AuthService service;
+	private final AuthService service;
+
+	public AuthController(AuthService service) {
+		this.service = service;
+	}
 
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@Valid @RequestBody AuthRequestDTO dto) {

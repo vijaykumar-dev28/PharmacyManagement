@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.dto.response.MedicineResponseDTO;
@@ -15,12 +14,14 @@ import com.pharmacy.repository.MedicineRepository;
 
 @Service
 public class ReportService {
-	@Autowired
-	private MedicineService medicineService;
+	private final MedicineService medicineService;
+	private final MedicineRepository medicineRepo;
 	
-	@Autowired
-	private MedicineRepository medicineRepo;
-	
+	public ReportService(MedicineService medicineService, MedicineRepository medicineRepo) {
+		this.medicineService = medicineService;
+		this.medicineRepo = medicineRepo;
+	}
+
 	public double getExpiredValue(){
 		List<Medicine> expiredMedicines=medicineRepo.findByStatus(MedicineStatus.EXPIRED);
 		double total=expiredMedicines.stream().mapToDouble(m->m.getPrice()*m.getStockQuantity()).sum();

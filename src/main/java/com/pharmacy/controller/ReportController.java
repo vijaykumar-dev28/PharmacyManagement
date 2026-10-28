@@ -3,7 +3,6 @@ package com.pharmacy.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +15,13 @@ import com.pharmacy.service.ReportService;
 @RestController
 @RequestMapping("/reports")
 public class ReportController {
-	@Autowired
-	private ReportService service;
+	private final ReportService service;	
 	
+	public ReportController(ReportService service) {
+		
+		this.service = service;
+	}
+
 	@GetMapping("/expired-value")
 	public ResponseEntity<Double> getExpiredValue(){
 		return ResponseEntity.ok(service.getExpiredValue());

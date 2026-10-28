@@ -3,7 +3,6 @@ package com.pharmacy.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pharmacy.dto.request.StockTransactionRequestDTO;
 import com.pharmacy.dto.response.StockTransactionResponseDTO;
@@ -17,15 +16,17 @@ import com.pharmacy.repository.StockTransactionRepository;
 
 @Service
 public class StockTransactionService {
-	@Autowired
-	private StockTransactionRepository stockRepo;
+	private final StockTransactionRepository stockRepo;
+	private final MedicineService medicineService;
+	private final MedicineRepository medicineRepo;
 	
-	@Autowired
-	private MedicineService medicineService;
-	
-	@Autowired
-	private MedicineRepository medicineRepo;
-	
+	public StockTransactionService(StockTransactionRepository stockRepo, MedicineService medicineService,
+			MedicineRepository medicineRepo) {
+		this.stockRepo = stockRepo;
+		this.medicineService = medicineService;
+		this.medicineRepo = medicineRepo;
+	}
+
 	// helper method
 	private StockTransaction toEntity(StockTransactionRequestDTO d){
 		StockTransaction s=new StockTransaction();

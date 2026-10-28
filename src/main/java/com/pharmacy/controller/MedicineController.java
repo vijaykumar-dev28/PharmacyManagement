@@ -2,7 +2,6 @@ package com.pharmacy.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +23,14 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/medicines")
 public class MedicineController {
+    private final MedicineService medicineService;
 
-    @Autowired
-    private MedicineService medicineService;
+    public MedicineController(MedicineService medicineService) {
+		
+		this.medicineService = medicineService;
+	}
 
-    @PostMapping
+	@PostMapping
     public ResponseEntity<String> addMedicine(@Valid @RequestBody MedicineRequestDTO dto) {
         medicineService.addMedicine(dto);
         return ResponseEntity.status(201).body("Medicine added successfully!");

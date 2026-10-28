@@ -2,7 +2,6 @@ package com.pharmacy.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +19,13 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/stock")
 public class StockTransactionController {
-	@Autowired
-	private StockTransactionService service;
+	private final StockTransactionService service;
 	
+	public StockTransactionController(StockTransactionService service) {
+		
+		this.service = service;
+	}
+
 	@PostMapping("/add")
 	public ResponseEntity<String> addStock(@Valid @RequestBody StockTransactionRequestDTO d){
 		service.addStock(d);

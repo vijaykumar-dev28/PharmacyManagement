@@ -1,6 +1,5 @@
 package com.pharmacy.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,21 +16,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
+	private final JwtFilter jwtFilter;
 	
-	@Autowired
-	private JwtFilter jwtFilter;
+	private final CustomUserDetailsService userDetailsService;
 	
-	@Autowired
-	private CustomUserDetailsService userDetailsService;
-	
+	public SecurityConfig(JwtFilter jwtFilter, CustomUserDetailsService userDetailsService) {
+		this.jwtFilter = jwtFilter;
+		this.userDetailsService = userDetailsService;
+	}
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http.csrf(csrf->csrf.disable())
 		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeHttpRequests(auth->auth
 				.requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
-				.requestMatchers("/auth/register","/login").permitAll()
-				.requestMatchers("/register-admin").hasRole("ADMIN")
+				.requestMatchers("/auth/register", "/auth/login").permitAll()
+				.requestMatchers("/auth/register-admin").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.POST,"/medicines/**").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.PUT,"/medicines/**").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.DELETE,"/medicines/**").hasRole("ADMIN")
