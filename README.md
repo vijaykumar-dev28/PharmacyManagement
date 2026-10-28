@@ -13,33 +13,64 @@ A REST API for pharmacy stock management with JWT authentication,  role-based ac
 
 ---
 
+
 ## 🛠️ Tech Stack
-- Spring Boot 4.1.2 | Java 17
+- Java 17
+- Spring Boot 4.x
 - Spring Security + JWT
-- JPA & Hibernate | MySQL
-- Lombok | Maven
+- MySQL
+- Lombok
+- Maven
 
----
-
-## ⚙️ Setup
+## 🚀 How to Run
 1. Clone the repo
-2. Create MySQL database: `pharmacy_db`
-3. Update `application.properties` with your DB credentials and JWT secret
-4. Run: `mvn spring-boot:run`
+2. Set environment variables: DB_USERNAME, DB_PASSWORD, JWT_SECRET
+3. Run: `mvn spring-boot:run`
 
----
+## 🔐 Roles
+| Role  | Access |
+|-------|--------|
+| ADMIN | Full access (medicines, suppliers, reports, stock) |
+| USER  | View medicines, manage stock |
 
-## 🔑 Usage
-```
+## 📌 API Endpoints
 
-POST /auth/register-admin → Register
-POST /auth/login → Get JWT token
-Add token to headers: Authorization: Bearer <token>
+### Auth
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | /auth/register | Public | Register as USER |
+| POST | /auth/login | Public | Login & get JWT token |
+| POST | /auth/register-admin | ADMIN only | Register as ADMIN |
 
-```
+### Medicines
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | /medicines | ADMIN | Add medicine |
+| GET | /medicines | ADMIN, USER | Get all medicines |
+| GET | /medicines/{id} | ADMIN, USER | Get by ID |
+| PUT | /medicines/{id} | ADMIN | Update medicine |
+| DELETE | /medicines/{id} | ADMIN | Delete medicine |
+| GET | /medicines/expiring-soon | ADMIN, USER | Expiring medicines |
+| GET | /medicines/expired | ADMIN, USER | Expired medicines |
+| GET | /medicines/low-stock | ADMIN, USER | Low stock medicines |
+| GET | /medicines/search?name= | ADMIN, USER | Search by name |
+| GET | /medicines/category?category= | ADMIN, USER | Filter by category |
 
----
+### Suppliers
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | /suppliers | ADMIN | Add supplier |
+| GET | /suppliers | ADMIN | Get all suppliers |
+| PUT | /suppliers/{id} | ADMIN | Update supplier |
+| DELETE | /suppliers/{id} | ADMIN | Delete supplier |
 
-## 👨‍💻 Author
-**Vijay Kumar** — [@vijaykumar-dev28](https://github.com/vijaykumar-dev28)
-```
+### Stock
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | /stock | ADMIN, USER | Add stock transaction |
+| GET | /stock | ADMIN, USER | Get all transactions |
+
+### Reports
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| GET | /reports | ADMIN | Get pharmacy report |
