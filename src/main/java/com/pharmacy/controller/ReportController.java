@@ -27,6 +27,11 @@ public class ReportController {
 		return ResponseEntity.ok(service.getExpiredValue());
 	}
 	
+	@GetMapping("/expiring-soon")
+	public ResponseEntity<Double> getExpiringSoon(){
+		return ResponseEntity.ok(service.getExpiringSoon());
+	}
+	
 	@GetMapping("/category-wise")
 	public ResponseEntity<Map<Category, Integer>> getCategoryWiseStock(){
 		return ResponseEntity.ok(service.getCategoryWiseStock());
@@ -36,4 +41,6 @@ public class ReportController {
 	public ResponseEntity<List<MedicineResponseDTO>> getLowStockList(){
 		return ResponseEntity.ok(service.getLowStockList());
 	}
+	
+	
 }

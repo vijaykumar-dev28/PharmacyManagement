@@ -15,7 +15,7 @@ public class StockTransactionRequestDTO {
 	
 	@NotNull(message = "Medicine ID can't be empty")
 	private Integer medicineId;
-	
+
 	@NotNull(message = "Quantity can't be empty")
 	@Min(value = 0,message = "Quantity can't be negative")
 	private Integer quantity;

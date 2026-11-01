@@ -24,4 +24,5 @@ public class MedicineResponseDTO {
 	private LocalDate expiryDate;
 	private MedicineStatus status;
 	private String supplierName;
+	private Integer supplierId;
 }

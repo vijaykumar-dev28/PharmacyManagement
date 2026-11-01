@@ -37,4 +37,10 @@ public class ReportService {
 	public List<MedicineResponseDTO> getLowStockList() {
 		return medicineService.getLowStock();
 	}
+	
+	public double getExpiringSoon(){
+		List<Medicine> expiringSoondMedicines=medicineRepo.findByStatus(MedicineStatus.EXPIRING_SOON);
+		double total=expiringSoondMedicines.stream().mapToDouble(m->m.getPrice()*m.getStockQuantity()).sum();
+		return total;
+	}
 }

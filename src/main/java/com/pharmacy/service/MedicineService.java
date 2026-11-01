@@ -51,6 +51,7 @@ public class MedicineService {
 		mr.setExpiryDate(m.getExpiryDate());
 		mr.setStatus(m.getStatus());
 		mr.setSupplierName(m.getSupplier().getName());
+		mr.setSupplierId(m.getSupplier().getId());
 		return mr;
 	}
 	
