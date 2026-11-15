@@ -363,8 +363,7 @@ All endpoints, request bodies, and response schemas are documented and testable 
 
 ## 🔗 Related Repository
 
-**Frontend (React + Vite):** *(coming soon)*
-
+**Frontend (React + Vite):** [PharmacyManagement-Frontend](https://github.com/vijaykumar-dev28/PharmacyManagement-Frontend)
 ---
 
 ## 👨‍💻 Author
