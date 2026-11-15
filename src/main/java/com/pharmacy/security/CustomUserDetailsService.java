@@ -16,9 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public CustomUserDetailsService(UserRepository repo) {
 		this.repo = repo;
 	}
-
-
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user=repo.findByUsername(username).orElseThrow(()->new com.pharmacy.exceptions.UserNotFoundException("User not found: " + username));
